@@ -1,15 +1,19 @@
-import { formatCurrency } from "../../utils/helpers";
+import DeleteButton from "./deleteButton";
+import UpdateItemQuantity from "./UpdateItemQuantity";
 
 function CartItem({ item }) {
-  const { pizzaId, name, quantity, totalPrice } = item;
+  const { pizzaId, name, quantity, unitPrice } = item;
 
   return (
-    <li>
-      <p>
+    <li className="py-3 sm:flex sm:items-center sm:justify-between">
+      <p className="mb-1 sm:mb-0">
         {quantity}&times; {name}
       </p>
-      <div>
-        <p>{formatCurrency(totalPrice)}</p>
+      <div className="flex items-center justify-between sm:gap-6">
+        <p className="text-sm font-bold">${unitPrice * quantity}</p>
+
+        <UpdateItemQuantity pizzaId={pizzaId} quantity={quantity} />
+        <DeleteButton pizzaId={pizzaId} />
       </div>
     </li>
   );
